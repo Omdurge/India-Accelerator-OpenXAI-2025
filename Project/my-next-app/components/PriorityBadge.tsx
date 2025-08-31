@@ -1,16 +1,15 @@
-import { Quadrant } from "@/lib/priority";
+export default function PriorityBadge({ urgency, importance }: { urgency: number; importance: number }) {
+  let color = "bg-gray-300 text-black";
+  const score = urgency + importance;
 
+  if (score >= 8) color = "bg-red-500 text-white";
+  else if (score >= 6) color = "bg-orange-500 text-white";
+  else if (score >= 4) color = "bg-yellow-400 text-black";
+  else color = "bg-green-400 text-black";
 
-export default function PriorityBadge({ quadrant }: { quadrant: Quadrant }) {
-const colors: Record<Quadrant, string> = {
-"Do First": "#ef4444",
-"Schedule": "#3b82f6",
-"Delegate": "#10b981",
-"Eliminate": "#6b7280",
-};
-return (
-<span style={{ background: colors[quadrant], color: "white", padding: "2px 8px", borderRadius: 8 }}>
-{quadrant}
-</span>
-);
+  return (
+    <span className={`px-2 py-1 text-xs font-semibold rounded-lg ${color}`}>
+      ⏱ {urgency} | ⭐ {importance}
+    </span>
+  );
 }
